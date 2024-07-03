@@ -1,34 +1,37 @@
-create database Popular_Songs;
-use Popular_Songs;
-select * from songs;
+ ##Average OF earnings OF ALL movies
+SELECT
+  AVG(opening_weekend_us) AS `Average_open`,
+  AVG(gross_us) AS `Average_Gros_US`,
+  AVG(gross_world) AS `Average_Gros_World`
+FROM
+  `learning-diego.Mavel_Movies.MCU_Films` ;
 
-##Checking for missisng values 
-select * from songs where `key` is null;
+ ##Trends in films length OVER time.
+SELECT
+  movie,
+  FORMAT_DATE('%Y-%b-%d', release_date) AS `date`,
+  length_hrs,
+  gross_us,
+FROM
+  `learning-diego.Mavel_Movies.MCU_Films`
+ORDER BY
+  `date` ASC;
 
-##
-select track_name, `artist(s)_name`, released_year, format(in_spotify_playlists, 0), format(streams, 0), `danceability_%` from songs 
-order by streams desc;
+SELECT
+  movie,
+  gross_us
+FROM
+  `learning-diego.Mavel_Movies.MCU_Films`
+ORDER BY
+  gross_us DESC;
 
-select track_name, `artist(s)_name`, format(streams, 0), `danceability_%` from songs 
-where `danceability_%` > 70
-order by streams desc;
-
-## Total number of artits
-select count(distinct `artist(s)_name`) as "Total of Artists" from songs;
-
-## Total number of songs
-select count(distinct track_name) as "Total of Songs" from songs;
-
-## 10 most Popular Songs 
-select track_name, `artist(s)_name`, format(streams, 0) from songs order by streams desc limit 10;
-
-## Top 1 Most and Less Popular song
-(select track_name, `artist(s)_name`, format(streams, 0) from songs order by streams desc limit 1)
-union
-(select track_name, `artist(s)_name`, format(streams, 0) from songs order by streams asc limit 1);
-
-## Release Year Distribution
-select released_year, count(track_name) as "Songs Released" from songs group by released_year order by released_year desc;
-
-##Correlation Matrix
-select track_name, in_spotify_playlists, `artist(s)_name`, format(streams, 0), `danceability_%`, bpm from songs;
+##Monthly earning in US 
+SELECT
+  SUM(gross_us) AS `Gross_US_M`,
+  FORMAT_DATETIME("%B, %Y",release_date) AS `Month`,
+ FROM
+  `learning-diego.Mavel_Movies.MCU_Films`
+GROUP BY
+  `Month`
+ORDER BY
+  Gross_US_M DESC ;
