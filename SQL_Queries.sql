@@ -1,4 +1,7 @@
- ##Average OF earnings OF ALL movies
+###Cleaning and validating data with SQL
+
+
+##Average OF earnings OF ALL movies
 SELECT
   AVG(opening_weekend_us) AS `Average_open`,
   AVG(gross_us) AS `Average_Gros_US`,
