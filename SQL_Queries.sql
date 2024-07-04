@@ -25,11 +25,13 @@ FROM
 ORDER BY
   gross_us DESC;
 
-##Monthly earning in US 
+  ##Comparation monthly earning in US and World
 SELECT
-  SUM(gross_us) AS `Gross_US_M`,
   FORMAT_DATETIME("%B, %Y",release_date) AS `Month`,
- FROM
+  SUM(gross_us) AS `Gross_US_M`,
+  SUM(gross_world) AS `Gross_World_M`,
+  (SUM(gross_us)/SUM(gross_world)) * 100 AS `repres_Total`,
+FROM
   `learning-diego.Mavel_Movies.MCU_Films`
 GROUP BY
   `Month`
