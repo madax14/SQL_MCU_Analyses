@@ -40,3 +40,10 @@ GROUP BY
   `Month`
 ORDER BY
   Gross_US_M DESC ;
+
+## Opening wenkends earnig represantation of the total earning.
+  SELECT
+  movie,
+  (opening_weekend_us/gross_world) * 100 AS `Opening Represent`
+FROM
+  `learning-diego.Mavel_Movies.MCU_Films`
